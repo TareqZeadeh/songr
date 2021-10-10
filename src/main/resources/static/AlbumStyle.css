@@ -1,0 +1,41 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+body {
+background-color : silver ;
+}
+
+.Albums-list{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.Albums-list ul{
+    width: 70%;
+    list-style:none;
+    flex-basis: 33.33%;
+}
+
+.Albums-list ul li {
+    margin: 10px;
+}
+
+.image-Album{
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+h1{
+     width: 100%;
+                text-align: center;
+                background-color: black;
+                padding: 20px 0;
+                color: white;
+                margin-bottom: 30px;
+}
+.home-img{
+width : 1000px;
+height : 1000px;
+}
