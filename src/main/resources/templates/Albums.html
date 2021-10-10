@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/AlbumStyle.css}">
+    <title>Title</title>
+</head>
+<body>
+<h1>Album Songs</h1>
+<div class="Albums">
+    <ul class="Album" th:each="Albums : ${Albums}">
+        <li th:text="'Title: ' + ${Albums.title}"></li>
+        <li th:text="'Artist: ' + ${Albums.artist}"></li>
+        <li th:text="'Song Count: ' + ${Albums.songCount}"></li>
+        <li th:text="'Length: ' + ${Albums.length} +'sec'"></li>
+        <img th:src="${Albums.imageUrl}"/>
+    </ul>
+</div>
+</body>
+</html>
