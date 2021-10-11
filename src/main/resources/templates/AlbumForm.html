@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <!-- action is the path to our POST action, method = post -->
+    <form action="/albums" method="post">
+        <!-- boring html inputs! the "name" matches the @RequestParam's on the controller -->
+        <p>Title</p><input type="text" name="title"/></br>
+        <p>Artist</p><input type="text" name="artist"/></br>
+        <p>Song Count</p><input type="number" name="songCount"/></br>
+        <p>Length</p><input type="number" name="length"/></br>
+        <p>imageUrl</p><input type="text" name="imageUrl"/></br>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<ul class="Album" th:each="Albums : ${Albums}">
+    <li th:text="'Title: ' + ${Albums.title}"></li>
+    <li th:text="'Artist: ' + ${Albums.artist}"></li>
+    <li th:text="'Song Count: ' + ${Albums.songCount}"></li>
+    <li th:text="'Length: ' + ${Albums.length} +'sec'"></li>
+    <img th:src="${Albums.imageUrl}"/>
+</ul>
+</body>
+</html>
