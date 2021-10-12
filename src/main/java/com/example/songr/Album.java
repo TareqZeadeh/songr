@@ -1,6 +1,7 @@
 package com.example.songr;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Album {
@@ -13,6 +14,8 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @OneToMany(mappedBy = "album")
+    private List<Songs> addedSongs;
 
     public Album() {
     }
@@ -68,7 +71,7 @@ public class Album {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<Songs> getAddedSongs() {
+        return addedSongs;
     }
 }
