@@ -6,11 +6,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
+
 @Controller
 public class MainController {
 
     @Autowired
     private AlbumRepository albumRepository;
+
+    private final SongsRepository songsRepository;
+    public MainController(SongsRepository songsRepository){
+        this.songsRepository=songsRepository;
+    }
 
     @GetMapping("/hello")
     public String helloWorld(@RequestParam(name = "name", required = false, defaultValue = "world") String name, Model model) {
@@ -43,7 +50,7 @@ public class MainController {
     @PostMapping("/albums")
     public RedirectView addNewAlbum(@ModelAttribute Album album){
         albumRepository.save(album);
-        return new RedirectView("AlbumForm");
+        return new RedirectView("/songs/newSong");
     }
 
     @GetMapping("/allAlbums")
@@ -51,6 +58,31 @@ public class MainController {
         model.addAttribute("Albums", albumRepository.findAll());
 
         return "Albums";
+    }
+    //======================lab 13=============================
+    @GetMapping("/songs")
+    public String getAllSongs(Model model){
+        List<Songs> songs=songsRepository.findAll();
+        model.addAttribute("songs",songs);
+        return "Songs";
+    }
+    @GetMapping("/songs/newSong")
+    public String addSongPage(Model model){
+//        model.addAttribute("Songs",songsRepository.findAll());
+        return "SongForm";
+    }
+    @PostMapping("/song")
+    public RedirectView addSong(@ModelAttribute SongsDto songDto){
+        Album album = albumRepository.findAuthorByTitle(songDto.getAlbum()).orElseThrow();
+        Songs song = new Songs(songDto.getTitle(),songDto.getLength(),songDto.getTrackNumber(),album);
+    songsRepository.save(song);
+    return new RedirectView("songs");
+    }
+    @GetMapping("/songs/album/{album}")
+    public String getAlbumSongs(@PathVariable String album, Model model){
+        List<Songs> songs = songsRepository.findAllByAlbum_Title(album).orElseThrow();
+        model.addAttribute("songs", songs);
+        return "Songs";
     }
 
 
