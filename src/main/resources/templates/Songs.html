@@ -7,10 +7,10 @@
 <body>
 <div >
     <ul th:each="songs : ${songs}">
-        <li th:text="'Title: ' + ${song.title}"></li>
-        <li th:text="'Length: ' + ${song.length} +'sec'"></li>
-        <li th:text="'Track Number: ' + ${song.trackNumber}"></li>
-        <li th:text="'Album: ' + ${song.album.title}"></li>
+        <li th:text="'Title: ' + ${songs.title}"></li>
+        <li th:text="'Length: ' + ${songs.length} +'sec'"></li>
+        <li th:text="'Track Number: ' + ${songs.trackNumber}"></li>
+        <li th:text="'Album: ' + ${songs.album.title}"></li>
     </ul>
 </div>
 </body>

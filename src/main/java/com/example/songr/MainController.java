@@ -68,7 +68,7 @@ public class MainController {
     }
     @GetMapping("/songs/newSong")
     public String addSongPage(Model model){
-//        model.addAttribute("Songs",songsRepository.findAll());
+        model.addAttribute("Songs",songsRepository.findAll());
         return "SongForm";
     }
     @PostMapping("/song")
@@ -76,9 +76,9 @@ public class MainController {
         Album album = albumRepository.findAuthorByTitle(songDto.getAlbum()).orElseThrow();
         Songs song = new Songs(songDto.getTitle(),songDto.getLength(),songDto.getTrackNumber(),album);
     songsRepository.save(song);
-    return new RedirectView("songs");
+    return new RedirectView("/songs");
     }
-    @GetMapping("/songs/album/{album}")
+    @GetMapping("/songs/{album}")
     public String getAlbumSongs(@PathVariable String album, Model model){
         List<Songs> songs = songsRepository.findAllByAlbum_Title(album).orElseThrow();
         model.addAttribute("songs", songs);
